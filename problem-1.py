@@ -14,14 +14,10 @@ def trebuchet(cipher):
         if char.isdigit() == True:
             digits.append(char)
             break
-        else:
-            continue
     for char in password_backwards:
         if char.isdigit() == True:
             digits.append(char)
             break
-        else:
-            continue
     number = int(digits[0] + digits[1])
     return number
 
@@ -40,3 +36,11 @@ print(sum(number_list))
 
 # print(password)
 # print(password_backwards)
+
+# oneightwo 12
+
+# jzb1oneightqqr
+# j - jz - jzb - jzb1
+# r - qr - qqr - tqqr - htqqr
+# q - qq - tqq - htqq - ghtqq
+# t - ht - ght - ight - eight
