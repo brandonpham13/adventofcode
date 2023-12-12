@@ -17,13 +17,14 @@ number_dict = {
 def trebuchet(cipher):
     digits = []
     found = False
+    # find first number
     for index, char in enumerate(cipher):
         if found:
             break
         num_checker = []
         for sub_index in range(index, len(cipher)):
             if cipher[sub_index].isdigit():
-                digits.append(cipher[sub_index])
+                digits.append(int(cipher[sub_index]))
                 found = True
                 break
             num_checker.append(cipher[sub_index])
@@ -35,9 +36,32 @@ def trebuchet(cipher):
                     break
             if len(num_checker) >= 5:
                 break
+    # find last number
+    found = False
+    # need to figure out how to index this backwards
+    for index in reversed(list(enumerate(cipher))):
+        if found:
+            break
+        num_checker = []
+        for sub_index in range(len(cipher) - 1, index, -1):
+            if cipher[sub_index].isdigit():
+                digits.append(int(cipher[sub_index]))
+                found = True
+                break
+            num_checker.insert(0, cipher[sub_index])
+            if len(num_checker) >= 3:
+                candidate = "".join(num_checker)
+                if candidate in number_dict:
+                    digits.append(number_dict[candidate])
+                    found = True
+                    break
+            if len(num_checker) >= 5:
+                break
+
+    return digits
 
 
-trebuchet("kjdbfgioasubfkljsfbnlkasufgb")
+print(trebuchet("kjdbfg2threek"))
 
 
 #     for char in password_backwards:
