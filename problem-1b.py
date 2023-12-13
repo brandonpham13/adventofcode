@@ -39,7 +39,7 @@ def trebuchet(cipher):
     # find last number
     found = False
     # range here is incorrect
-    for index in range(len(cipher) - 1, 0, -1):
+    for index in range(len(cipher) - 1, -1, -1):
         if found:
             break
         num_checker = []
@@ -61,11 +61,9 @@ def trebuchet(cipher):
     return number
 
 
-print(trebuchet("4f"))
+with open("elves.txt", "r") as file:
+    number_list = []
+    for line in file:
+        number_list.append(trebuchet(line.strip()))
 
-# with open("elves.txt", "r") as file:
-#     number_list = []
-#     for line in file:
-#         number_list.append(trebuchet(line.strip()))
-
-# print(sum(number_list))
+print(sum(number_list))
