@@ -22,11 +22,11 @@ def trebuchet(cipher):
         if found:
             break
         num_checker = []
+        if cipher[index].isdigit():
+            digits.append(int(cipher[index]))
+            found = True
+            break
         for sub_index in range(index, len(cipher)):
-            if cipher[sub_index].isdigit():
-                digits.append(int(cipher[sub_index]))
-                found = True
-                break
             num_checker.append(cipher[sub_index])
             if len(num_checker) >= 3:
                 candidate = "".join(num_checker)
@@ -38,17 +38,17 @@ def trebuchet(cipher):
                 break
     # find last number
     found = False
-    # need to figure out how to index this backwards
-    for index in reversed(list(enumerate(cipher))):
+    # range here is incorrect
+    for index in range(len(cipher) - 1, 0, -1):
         if found:
             break
         num_checker = []
-        for sub_index in range(len(cipher) - 1, index, -1):
-            if cipher[sub_index].isdigit():
-                digits.append(int(cipher[sub_index]))
-                found = True
-                break
-            num_checker.insert(0, cipher[sub_index])
+        if cipher[index].isdigit():
+            digits.append(int(cipher[index]))
+            found = True
+            break
+        for sub_index in range(index, len(cipher)):
+            num_checker.append(cipher[sub_index])
             if len(num_checker) >= 3:
                 candidate = "".join(num_checker)
                 if candidate in number_dict:
@@ -57,22 +57,11 @@ def trebuchet(cipher):
                     break
             if len(num_checker) >= 5:
                 break
-
-    return digits
-
-
-print(trebuchet("kjdbfg2threek"))
+    number = int(str(digits[0]) + str(digits[1]))
+    return number
 
 
-#     for char in password_backwards:
-#         if char.isdigit() == True:
-#             digits.append(char)
-#             break
-#         else:
-#             continue
-#     number = int(digits[0] + digits[1])
-#     return number
-
+print(trebuchet("4f"))
 
 # with open("elves.txt", "r") as file:
 #     number_list = []
